@@ -14,7 +14,6 @@ class Film(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(30))
     tags: Mapped[str] = mapped_column(String(100))
-    path: Mapped[str] = mapped_column(String(100))
     rating: Mapped[float] = mapped_column(Float)
     year: Mapped[int] = mapped_column(INT)
     type: Mapped[str] = mapped_column(String(30))
@@ -22,7 +21,7 @@ class Film(Base):
     country: Mapped[str] = mapped_column(String(30))
 
     def __repr__(self):
-        return f"Film(id={self.id!r}, name={self.name!r}, path={self.path!r})"
+        return f"Film(id={self.id!r}, name={self.name!r})"
 
 
 class User(Base):
@@ -33,7 +32,7 @@ class User(Base):
     vip: Mapped[bool] = mapped_column(Boolean)
 
     def __repr__(self):
-        return f"User(id={self.id!r}, name={self.registration!r}, fullname={self.vip!r})"
+        return f"User(id={self.id!r}, registration={self.registration!r}, vip={self.vip!r})"
 
 
 # Функция для поиска фильма по неполному названию

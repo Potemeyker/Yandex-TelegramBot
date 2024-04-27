@@ -1,0 +1,16 @@
+{
+  "name": "Довод",
+  "type": 0,
+  "voices": {
+    "Русский": {
+      "240": "BAACAgIAAxkBAAOdZi0lfPqUX7ZzOUUsW1_uCxppnIoAAggcAAKyC0hIeJT33AABknHANAQ",
+      "340": "BAACAgIAAxkBAAOeZi0m1XTAnC5KdDmKarFzzjLtdhMAAuUaAAI5TvFKSsQSngsybSg0BA",
+      "480": "BAACAgQAAxkBAAOfZi0qnP1TJZAmwZu3QKyQELslqDsAAuYMAAJjnjlShglyjehA4DE0BA",
+      "720": "BAACAgQAAxkBAAMoZivPxP5BgqQkl0tBj4dyTzzO53QAAiAiAAKIEahTMyoOxip6NYs0BA"
+    },
+    "Английский": {
+      "1080": "BAACAgIAAxkBAAMwZiwHlCxbZDquXHDJNSV8g7HfEwcAAuEsAAJqklFLWcoKDakSpq00BA"
+    }
+  },
+  "poster": "AgACAgIAAxkBAAOqZi0_iwl0ri_GCj0B5Z4nmF9Tub8AAtDTMRsPPXBJIKH9rdLaRakBAAMCAANzAAM0BA"
+}
