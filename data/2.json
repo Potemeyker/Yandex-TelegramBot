@@ -11,45 +11,57 @@
     "1e7",
     "1e8"
   ],
-  "voices": {
-    "Кубик в Кубе": {
-      "240": {
-        "1e1": "",
-        "1e2": "",
-        "1e3": "",
-        "1e4": "",
-        "1e5": "",
-        "1e6": "",
-        "1e7": "",
-        "1e8": ""
+  "videos": {
+    "1e1": {
+      "Русский": {
+        "480": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA",
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
       },
-      "1080": {
-        "1e1": "",
-        "1e2": "",
-        "1e3": ""
+      "Английский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
       }
     },
-    "Английский": {
-      "240": {
-        "1e1": "",
-        "1e2": "",
-        "1e3": "",
-        "1e4": "",
-        "1e5": "",
-        "1e6": "",
-        "1e7": "",
-        "1e8": ""
+    "1e2": {
+      "Русский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
       },
-      "1080": {
-        "1e1": "",
-        "1e2": "",
-        "1e3": "",
-        "1e4": "",
-        "1e5": "",
-        "1e6": "",
-        "1e7": "",
-        "1e8": ""
+      "Английский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
+      }
+    },
+    "1e3": {
+      "Русский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
+      },
+      "Английский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
+      }
+    },
+    "1e4": {
+      "Английский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
+      }
+    },
+    "1e5": {
+      "Английский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
+      }
+    },
+    "1e6": {
+      "Английский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
+      }
+    },
+    "1e7": {
+      "Английский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
+      }
+    },
+    "1e8": {
+      "Английский": {
+        "720": "BAACAgQAAxkBAAPMZi1fcaBKL2kb6b6XXrSIFzVI9BgAAt4aAAJDavhQTueuzC21FTQ0BA"
       }
     }
-  }
+  },
+  "poster": "AgACAgQAAxkBAAPgZi6k_01GbTPrNqq_m7g5_8ZsayMAAueyMRuyVVxTD_K9f6BAnRQBAAMCAAN5AAM0BA"
 }
