@@ -1,29 +1,28 @@
 import json
 import logging
 
-from telegram._files import voice
-
 from database import add_user, find_user, search_film
 
-from telegram import ReplyKeyboardMarkup, InputFile, InlineKeyboardButton, InlineKeyboardMarkup, InputMedia
-from telegram.ext import Application, CommandHandler, MessageHandler, filters, ConversationHandler, CallbackQueryHandler
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, InputMedia
+from telegram.ext import filters, Application, CommandHandler, MessageHandler, CallbackQueryHandler
 from telegram.constants import ParseMode
 
-BOT_TOKEN = "6471385855:AAEE0HX4cAbt8GJ15ZsxD35Mw5cc643UCBU"
+BOT_TOKEN = "6471385855:AAEE0HX4cAbt8GJ15ZsxD35Mw5cc643UCBU"  # токен бота
 
-# Enable logging
+# логирование
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO
 )
-# set higher logging level for httpx to avoid all GET and POST requests being logged
 logging.getLogger("httpx").setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
+# переменные константы для вызова определённых функций
 NEW_SEARCH, SEARCH, INSTRUCTION, SHOW, VOICES, QUALITY, NONE, SERIES = map(str, range(8))
 
 
 async def start(update, context):
+    """Отправляет приветственное сообщение при вызове команды /start"""
     keyboard = [
         [InlineKeyboardButton("💡 Инструкция", callback_data=INSTRUCTION)],
     ]
@@ -42,6 +41,8 @@ async def start(update, context):
 
 
 async def new_search(update, context):
+    """Создаёт новое сообщение поиска при callback=NEW_SEARCH"""
+
     query = update.callback_query
     await query.answer()
 
@@ -58,6 +59,8 @@ async def new_search(update, context):
 
 
 async def search(update, context):
+    """Меняет сообщение бота под поиск при callback=SEARCH"""
+
     query = update.callback_query
     await query.answer()
 
@@ -73,6 +76,8 @@ async def search(update, context):
 
 
 async def instruction(update, context):
+    """Меняет сообщение бота на текст инструкции при callback=INSTRUCTION"""
+
     query = update.callback_query
     await query.answer()
 
@@ -81,8 +86,8 @@ async def instruction(update, context):
     ]
 
     await query.edit_message_text("ЧТО ПОЗВОЛЯЕТ ДЕЛАТЬ БОТ?\n\n"
-                                  "С помощью бота ты сможешь искать фильм или сериал, смотреть его, добавлять в"
-                                  "избранное, скачивать и смотреть офлайн!\n\n\n"
+                                  "С помощью бота ты сможешь искать фильм или сериал, смотреть его,"
+                                  " скачивать и смотреть офлайн!\n\n\n"
                                   "КАК ПОЛЬЗОВАТЬСЯ БОТОМ?\n\n"
                                   "🔍 Отправь боту название кино и бот выдаст результат поиска, примеры:\n"
                                   "✅ бесстыжие\n"
@@ -91,6 +96,9 @@ async def instruction(update, context):
 
 
 async def reply(update, context):
+    """При получении сообщения от пользователя обращается к БД для поиска фильма
+    Если фильм есть в БД выводит видео и его настройки, иначе выводит сообщение, что фильм не найден"""
+
     response = update.message.text
 
     movie = search_film(response)
@@ -157,6 +165,8 @@ async def reply(update, context):
 
 
 async def show_movie(update, context):
+    """Выводит видео и его настройки при callback=SHOW"""
+
     query = update.callback_query
     await query.answer()
 
@@ -195,19 +205,19 @@ async def show_movie(update, context):
         all_series: list[str] = movie_json["all_series"]
 
         if all_series.index(series) == 0:
-            previous = InlineKeyboardButton("✖️ Предыдущая", callback_data=NONE)
+            prev_button = InlineKeyboardButton("✖️ Предыдущая", callback_data=NONE)
         else:
-            previous = InlineKeyboardButton("⬅️ Предыдущая",
-                                            callback_data=f"{SHOW} series {all_series[all_series.index(series) - 1]}")
+            prev_button = InlineKeyboardButton("⬅️ Предыдущая",
+                                               callback_data=f"{SHOW} series {all_series[all_series.index(series) - 1]}")
 
         if all_series.index(series) == len(all_series) - 1:
-            next = InlineKeyboardButton("✖️ Следующая", callback_data=NONE)
+            next_button = InlineKeyboardButton("✖️ Следующая", callback_data=NONE)
         else:
-            next = InlineKeyboardButton("➡️ Следующая",
-                                        callback_data=f"{SHOW} series {all_series[all_series.index(series) + 1]}")
+            next_button = InlineKeyboardButton("➡️ Следующая",
+                                               callback_data=f"{SHOW} series {all_series[all_series.index(series) + 1]}")
 
         keyboard = [
-            [previous, next],
+            [prev_button, next_button],
             [InlineKeyboardButton("🔢 Выбор серии", callback_data=f"{SERIES} voice")],
             [
                 InlineKeyboardButton("🔊 Озвучка", callback_data=VOICES),
@@ -236,6 +246,7 @@ async def show_movie(update, context):
 
 
 async def change_voices(update, context):
+    """Выводит кнопки для выбора озвучки при callback=VOICES"""
     query = update.callback_query
     await query.answer()
 
@@ -254,6 +265,7 @@ async def change_voices(update, context):
 
 
 async def change_quality(update, context):
+    """Выводит кнопки для выбора качества при callback=QUALITY"""
     query = update.callback_query
     await query.answer()
 
@@ -273,6 +285,7 @@ async def change_quality(update, context):
 
 
 async def change_series(update, context):
+    """Выводит кнопки для выбора серии при callback=SERIES"""
     query = update.callback_query
     await query.answer()
 
@@ -308,16 +321,26 @@ async def change_series(update, context):
 
 
 def main():
+    """Функция запуска бота"""
     application = Application.builder().token(BOT_TOKEN).build()
 
+    # задаёт выполнение функции start при команде /start
     application.add_handler(CommandHandler("start", start))
+    # задаёт выполнение функции reply при получении текстового сообщения от пользователя
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, reply))
+    # задаёт выполнение функции search при нажатии кнопки содержавшую в callback SEARCH
     application.add_handler(CallbackQueryHandler(search, pattern=f"^{SEARCH}$"))
+    # задаёт выполнение функции new_search при нажатии кнопки содержавшую в callback NEW_SEARCH
     application.add_handler(CallbackQueryHandler(new_search, pattern=f"^{NEW_SEARCH}$"))
+    # задаёт выполнение функции instruction при нажатии кнопки содержавшую в callback INSTRUCTION
     application.add_handler(CallbackQueryHandler(instruction, pattern=f"^{INSTRUCTION}$"))
+    # задаёт выполнение функции show_movie при нажатии кнопки содержавшую в callback SHOW
     application.add_handler(CallbackQueryHandler(show_movie, pattern=f"^{SHOW}.*$"))
+    # задаёт выполнение функции change_voices при нажатии кнопки содержавшую в callback VOICES
     application.add_handler(CallbackQueryHandler(change_voices, pattern=f"^{VOICES}$"))
+    # задаёт выполнение функции change_quality при нажатии кнопки содержавшую в callback QUALITY
     application.add_handler(CallbackQueryHandler(change_quality, pattern=f"^{QUALITY}$"))
+    # задаёт выполнение функции change_series при нажатии кнопки содержавшую в callback SERIES
     application.add_handler(CallbackQueryHandler(change_series, pattern=f"^{SERIES}.*$"))
 
     application.run_polling()
